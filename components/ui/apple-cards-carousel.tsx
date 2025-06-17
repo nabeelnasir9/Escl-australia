@@ -16,7 +16,7 @@ export function AppleCardsCarouselDemo() {
       <p className="mt-8 text-3xl font-bold text-center tracking-tight text-white sm:text-4xl">
         Services We Provide{" "}
       </p>
-      <p className="mx-auto mt-3 max-w-prose sm:text-md text-[12px] text-center text-white p-2">
+      <p className="mx-auto mt-3 max-w-prose sm:text-md text-[13px] text-center text-white p-2">
         We specialize in staffing across a wide range of industries, providing
         tailored recruitment solutions that match the unique demands of each
         sector and deliver the right talent for your specific needs.

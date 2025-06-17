@@ -58,7 +58,7 @@ export default function IndustriesWe() {
         <p className="mt-8 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           Industries We Serve
         </p>
-        <p className="mx-auto mt-3 max-w-prose sm:text-md text-[12px] text-gray-500">
+        <p className="mx-auto mt-3 max-w-prose sm:text-md text-[13px] text-gray-500">
           We specialize in staffing across a wide range of industries, providing
           tailored recruitment solutions that match the unique demands of each
           sector and deliver the right talent for your specific needs.

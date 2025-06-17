@@ -41,7 +41,7 @@ const Footer = () => {
             </Link>
             <div className="mt-4 sm:mt-6">
               <p className="text-slate-600 leading-relaxed text-sm sm:text-base lg:text-sm">
-                ESCL delivers innovative industrial long-lasting solutions at a
+              EGSC delivers innovative industrial long-lasting solutions at a
                 high standard of quality, economy and at the delivery time you
                 require.
               </p>
@@ -150,7 +150,7 @@ const Footer = () => {
 
         <div className="text-center">
           <p className="text-[#42568C] text-xs sm:text-sm font-medium italic">
-            Copyright ©2025 ESCL. All Rights Reserved.
+            Copyright ©2025 EGSC. All Rights Reserved.
           </p>
         </div>
       </div>

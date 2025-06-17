@@ -19,6 +19,10 @@ import {
 } from "react-icons/fi";
 import { HiBuildingOffice } from "react-icons/hi2";
 import { IconType } from "react-icons";
+import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
+import { CiLocationArrow1 } from "react-icons/ci";
+
+
 
 interface FormData {
   // Contact Information
@@ -129,7 +133,7 @@ export default function ContactUsForm() {
         {label} {required && <span className="text-red-500">*</span>}
       </label>
       <div className="relative">
-        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
           <Icon className="h-5 w-5 text-slate-400" />
         </div>
         {type === "textarea" ? (
@@ -176,7 +180,7 @@ export default function ContactUsForm() {
             Looking for Staff
           </h1>
           <p className="mt-4 text-md text-black italic">
-            Please fill in the below information for an ESCL Workforce
+            Please fill in the below information for an EGSC Workforce
             representative to contact regarding your requirements.
           </p>
         </div>
@@ -273,7 +277,7 @@ export default function ContactUsForm() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <InputField
-                icon={HiBuildingOffice}
+                icon={HiOutlineBuildingOffice2}
                 label="Company Name"
                 name="companyName"
                 required
@@ -286,7 +290,7 @@ export default function ContactUsForm() {
               />
 
               <InputField
-                icon={FiMapPin}
+                icon={CiLocationArrow1}
                 label="Company Address"
                 name="companyAddress"
                 required
@@ -367,7 +371,7 @@ export default function ContactUsForm() {
                 register={register("positionTitle", {
                   required: "Position title is required",
                 })}
-                placeholder="e.g. Senior Software Engineer"
+                placeholder="e.g. Planning Engineer"
               />
 
               <InputField
@@ -444,7 +448,7 @@ export default function ContactUsForm() {
                 register={register("awardName", {
                   required: "Award name is required",
                 })}
-                placeholder="e.g. IT Services Award 2020"
+                placeholder="e.g. Excellence Award 2020"
               />
 
               <InputField

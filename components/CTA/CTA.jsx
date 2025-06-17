@@ -4,7 +4,7 @@ export default function CTA() {
       <div className="px-6 py-24 sm:px-6 sm:py-32 lg:px-8">
         <div className="mx-auto max-w-6xl text-center">
           <h2 className="text-2xl font-extrabold text-balance text-white sm:text-5xl">
-            ESCL - Your End to End Staffing Partner Across Every Industry{" "}
+          EGSC - Your End to End Staffing Partner Across Every Industry{" "}
           </h2>
           <p className="mx-auto mt-6 max-w-4xl text-white sm:text-[15px] text-[13px] sm:text-center text-justify">
             Our comprehensive services span labour hire and casual staffing,

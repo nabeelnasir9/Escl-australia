@@ -51,9 +51,9 @@ const bangers = Bangers({
 });
 
 export const metadata: Metadata = {
-  title: "ESCL – Industrial Services & Maintenance in Jubail, Saudi Arabia",
+  title: "EGSC – Industrial Services & Maintenance in Jubail, Saudi Arabia",
   description:
-    "ESCL delivers professional industrial services in Jubail, Saudi Arabia. Specializing in plant maintenance, shutdowns & turnarounds, industrial cleaning, equipment servicing, and commissioning for oil & gas, petrochemical, steel and fertilizer industries.",
+    "EGSC delivers professional industrial services in Jubail, Saudi Arabia. Specializing in plant maintenance, shutdowns & turnarounds, industrial cleaning, equipment servicing, and commissioning for oil & gas, petrochemical, steel and fertilizer industries.",
 };
 
 export default function RootLayout({

@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Cal+Sans&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import "tailwindcss";
+
+
+:root {
+    /* Make sure your CSS is actually using the variables */
+    --font-bricolage: 'Bricolage Grotesque', sans-serif;
+    --font-jakarta: 'Plus Jakarta Sans', sans-serif;
+    --font-bangers: 'Bangers', cursive;
+    --font-montserat: 'Montserrat', sans-serif;
+    --font-raleway: 'Raleway', sans-serif;
+  }
+  
+  /* Add fallback styling for the fonts */
+  @layer base {
+    body {
+      font-family: var(--font-jakarta);
+    }
+    .font-bricolage {
+      font-family: var(--font-bricolage);
+    }
+    .font-jakarta {
+      font-family: var(--font-jakarta);
+    }
+    .font-bangers {
+      font-family: var(--font-bangers);
+    }
+    .font-montserat {
+        font-family: var(--font-montserat);
+      }
+  }
+  

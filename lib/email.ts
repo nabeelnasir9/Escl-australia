@@ -1,6 +1,4 @@
 import nodemailer from 'nodemailer';
-import fs from 'fs';
-import path from 'path';
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
@@ -18,7 +16,8 @@ export interface JobApplicationData {
   email: string;
   phone: string;
   position: string;
-  resumePath: string;
+  resumeBuffer: Buffer;
+  resumeFileName: string;
 }
 
 // Interface for contact form emails
@@ -51,7 +50,7 @@ export interface ContactFormData {
 
 // Function for sending job application emails
 export const sendJobApplicationEmail = async (data: JobApplicationData) => {
-  const { name, email, phone, position, resumePath } = data;
+  const { name, email, phone, position, resumeBuffer, resumeFileName } = data;
 
   // Verify SMTP configuration
   if (!process.env.SMTP_HOST || !process.env.SMTP_PORT || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
@@ -65,10 +64,6 @@ export const sendJobApplicationEmail = async (data: JobApplicationData) => {
   }
 
   try {
-    // Read the resume file
-    const resumeFileName = path.basename(resumePath);
-    const resumeContent = fs.readFileSync(resumePath);
-
     const mailOptions = {
       from: process.env.SMTP_USER,
       to: process.env.SMTP_USER,
@@ -94,7 +89,7 @@ export const sendJobApplicationEmail = async (data: JobApplicationData) => {
       attachments: [
         {
           filename: resumeFileName,
-          content: resumeContent
+          content: resumeBuffer
         }
       ]
     };

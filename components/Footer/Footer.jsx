@@ -13,9 +13,9 @@ const Footer = () => {
   ];
 
   const aboutItems = [
-    { name: "Overview", href: "/about/overview" },
-    { name: "Vision", href: "/about/vision" },
-    { name: "Mission", href: "/about/mission" },
+    { name: "About Us", href: "/about/overview" },
+    { name: "Our Vision", href: "/about/vision" },
+    { name: "Our Mission", href: "/about/mission" },
   ];
 
   const companyItems = [
@@ -48,7 +48,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="col-span-1">
-            <h4 className="text-[#42568C] font-extrabold text-base sm:text-lg lg:text-lg mb-4 sm:mb-6">
+            <h4 className="text-[#42568C] font-extrabold text-base sm:text-lg lg:text-lg mb-4 sm:mb-6 uppercase italic">
               Company
             </h4>
             <ul className="space-y-3 sm:space-y-4">
@@ -66,7 +66,7 @@ const Footer = () => {
           </div>
           {/* Services Column */}
           <div className="col-span-1">
-            <h4 className="text-[#42568C] font-extrabold text-base sm:text-lg lg:text-lg mb-4 sm:mb-6">
+            <h4 className="text-[#42568C] font-extrabold text-base sm:text-lg lg:text-lg mb-4 sm:mb-6 uppercase italic">
               Services
             </h4>
             <ul className="space-y-3 sm:space-y-4">
@@ -88,7 +88,7 @@ const Footer = () => {
 
           {/* Contact Information Column */}
           <div className="col-span-1 md:col-span-2 lg:col-span-1">
-            <h4 className="text-[#42568C] font-extrabold text-base sm:text-lg lg:text-lg mb-4 sm:mb-6">
+            <h4 className="text-[#42568C] font-extrabold text-base sm:text-lg lg:text-lg mb-4 sm:mb-6 uppercase italic">
               Contact
             </h4>
             <div className="space-y-4 sm:space-y-5">

@@ -62,7 +62,7 @@ const Banner = memo<BannerProps>(({
   return (
     <section 
       className={`
-        relative w-full overflow-hidden mt-16
+        relative w-full overflow-hidden mt-12
         ${heightClasses[height]}
         ${className}
       `}

@@ -87,6 +87,7 @@ export default function GovernmentStaffingPage() {
         priority={true}
         enableAnimation={true}
         animationDelay={300}
+        className="sm:mt-28 mt-20"
       />
       <p className="mt-8 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-center mt-20">
         Security-Cleared Professionals for All Government Levels
@@ -137,7 +138,7 @@ export default function GovernmentStaffingPage() {
                 <div className="mx-auto max-w-2xl sm:mx-0 sm:max-w-none">
                   <img
                     alt="Government staffing services"
-                    src="/HeroBaner/G-Staff.jpg"
+                    src="/Services/G-staff-nnew-1.jpg"
                     width={932}
                     height={842}
                     className="-mb-12 w-[900px] max-w-none rounded-tl-xl bg-gray-800 ring-1 ring-white/10"

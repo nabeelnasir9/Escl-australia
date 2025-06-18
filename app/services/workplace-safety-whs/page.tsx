@@ -93,6 +93,7 @@ export default function WorkplaceSafetyPage() {
         priority={true}
         enableAnimation={true}
         animationDelay={300}
+        className="sm:mt-28 mt-20"
       />
       <p className="mt-8 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-center mt-20">
         Keep Your Worksite Safe and Compliant
@@ -143,7 +144,7 @@ export default function WorkplaceSafetyPage() {
                 <div className="mx-auto max-w-2xl sm:mx-0 sm:max-w-none">
                   <img
                     alt="Workplace safety services"
-                    src="/HeroBaner/Safety.jpg"
+                    src="/Services/Safety-new.jpg"
                     width={932}
                     height={842}
                     className="-mb-12 w-[900px] max-w-none rounded-tl-xl bg-gray-800 ring-1 ring-white/10"

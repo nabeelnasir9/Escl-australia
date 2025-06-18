@@ -65,7 +65,7 @@ const Footer = () => {
             </ul>
           </div>
           {/* Services Column */}
-          <div className="col-span-1">
+          <div className="col-span-1 lg:ml-[-40px]">
             <h4 className="text-[#42568C] font-extrabold text-base sm:text-lg lg:text-lg mb-4 sm:mb-6 uppercase italic">
               Services
             </h4>

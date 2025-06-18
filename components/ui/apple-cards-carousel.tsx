@@ -64,18 +64,21 @@ const data = [
     title: "Labour Hire & Casual Staffing. ",
     src: "/Services/Labour.jpg",
     content: <DummyContent />,
+    href: "/services/labour-hire-casual-staffing",
   },
   {
     category: "02",
     title: "Permanent Recruitment. ",
     src: "/Services/Recruitment.jpg",
     content: <DummyContent />,
+    href: "/services/permanent-recruitment",
   },
   {
     category: "03",
     title: "Government Staffing. ",
     src: "/Services/G-Staff.jpg",
     content: <DummyContent />,
+    href: "/services/government-staffing",
   },
 
   {
@@ -83,17 +86,20 @@ const data = [
     title: "HR & Workforce Consulting. ",
     src: "/Services/Consultancy.jpg",
     content: <DummyContent />,
+    href: "/services/hr-workforce-consulting",
   },
   {
     category: "05",
     title: "Workplace Safety & WHS. ",
     src: "/Services/Safety.jpg",
     content: <DummyContent />,
+    href: "/services/workplace-safety-whs",
   },
   {
     category: "06",
     title: "Training & Development. ",
     src: "/Services/Training.jpg",
     content: <DummyContent />,
+    href: "/services/training-development",
   },
 ];

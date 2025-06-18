@@ -73,11 +73,12 @@ export default function PermanentRecruitmentPage() {
     <>
       <Banner
         title="Permanent Recruitment"
-        backgroundImage="/HeroBaner/Recruitment.jpg"
+        backgroundImage="/Services/Recruitment-new.jpg"
         height="xl"
         priority={true}
         enableAnimation={true}
         animationDelay={300}
+        className="sm:mt-28 mt-20"
       />
       <p className="mt-8 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-center mt-20">
         Find the Right Person for the Job—First Time

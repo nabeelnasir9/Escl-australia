@@ -49,11 +49,12 @@ export default function LabourHirePage() {
       <Banner
         title="Labour Hire & Casual Staffing"
         // subtitle="Get Skilled, Reliable Staff—Fast"
-        backgroundImage="/HeroBaner/Labour.jpg"
+        backgroundImage="/Services/Labour-new.jpg"
         height="xl"
         priority={true}
         enableAnimation={true}
         animationDelay={300}
+        className="sm:mt-28 mt-20"
       />
       <p className="mt-8 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-center mt-20">
         Get Skilled, Reliable Staff—Fast{" "}
@@ -107,7 +108,7 @@ export default function LabourHirePage() {
                 <div className="mx-auto max-w-2xl sm:mx-0 sm:max-w-none">
                   <img
                     alt="Product screenshot"
-                    src="/HeroBaner/Labour.jpg"
+                    src="/Services/Labour-new-1.jpg"
                     width={932}
                     height={842}
                     className="-mb-12 w-[900px] max-w-none rounded-tl-xl bg-gray-800 ring-1 ring-white/10"

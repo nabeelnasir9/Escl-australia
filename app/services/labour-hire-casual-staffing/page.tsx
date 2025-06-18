@@ -4,10 +4,11 @@ import Banner from "@/components/ui/Banner";
 import CTA from "@/components/CTA/CTA";
 import Footer from "@/components/Footer/Footer";
 import {
-  CloudArrowUpIcon,
-  LockClosedIcon,
-  ServerIcon,
-} from "@heroicons/react/20/solid";
+  ClockIcon,
+  UserGroupIcon,
+  ScaleIcon,
+  DocumentCheckIcon,
+} from '@heroicons/react/24/solid';
 import {
   FaWarehouse,
   FaTools,
@@ -19,27 +20,27 @@ import {
 const features = [
   {
     id: 1,
-    name: "Push to deploy:",
+    name: "24/7 Availability:",
     description: "24/7 availability for urgent placements",
-    icon: CloudArrowUpIcon,
+    icon: ClockIcon,
   },
   {
     id: 2,
-    name: "SSL certificates:",
+    name: "Pre-vetted Workers:",
     description: "Pre-vetted, fully referenced workers",
-    icon: LockClosedIcon,
+    icon: UserGroupIcon,
   },
   {
     id: 3,
-    name: "Database backups:",
+    name: "Scalable Staffing:",
     description: "Scalable staffing—from one-off jobs to large crews",
-    icon: ServerIcon,
+    icon: ScaleIcon,
   },
   {
     id: 4,
-    name: "Database backups:",
+    name: "Full Service Management:",
     description: "All compliance, payroll, and insurance managed in-house",
-    icon: ServerIcon,
+    icon: DocumentCheckIcon,
   },
 ];
 
@@ -77,9 +78,7 @@ export default function LabourHirePage() {
                   Why Choose Us?
                 </p>
                 <p className="mt-6 text-lg/8 text-gray-600">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
+                Flexible, scalable workforce solutions across warehousing, trades, civil construction, manufacturing, and more.
                 </p>
                 <dl className="mt-10 max-w-xl space-y-6 text-base/7 text-gray-600 lg:max-w-none">
                   {features.map((feature) => (

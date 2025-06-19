@@ -101,7 +101,7 @@ const Footer = () => {
                       Locations:
                     </p>
                     <p className="leading-relaxed text-sm sm:text-base lg:text-sm">
-                      Melbourne | Sydney | Brisbane | Adelaide | Perth
+                    C4 Level 1, 2 Main Street Point Cook, VIC 3030
                     </p>
                   </div>
                 </div>
@@ -116,10 +116,10 @@ const Footer = () => {
                       Email:
                     </p>
                     <Link 
-                      href="mailto:info@eliteglobalservice.com"
+                      href="mailto:info@elitegsc.com"
                       className="hover:text-slate-900 transition-colors duration-200 text-sm sm:text-base lg:text-sm break-all"
                     >
-                      info@eliteglobalservice.com
+                      info@elitegsc.com
                     </Link>
                   </div>
                 </div>
@@ -134,10 +134,10 @@ const Footer = () => {
                       Phone:
                     </p>
                     <Link 
-                      href="tel:1300000000"
+                      href="tel:+61 439 349 190"
                       className="hover:text-slate-900 transition-colors duration-200 text-sm sm:text-base lg:text-sm"
                     >
-                      1300 000 000
+                      +61 439 349 190
                     </Link>
                   </div>
                 </div>

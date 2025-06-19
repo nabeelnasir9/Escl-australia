@@ -371,7 +371,7 @@ export default function ContactUsForm() {
                 register={register("positionTitle", {
                   required: "Position title is required",
                 })}
-                placeholder="e.g. Planning Engineer"
+                placeholder=""
               />
 
               <InputField

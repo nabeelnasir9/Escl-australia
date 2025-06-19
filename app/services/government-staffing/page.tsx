@@ -74,6 +74,11 @@ const services = [
     icon: FaBuilding,
     title: "Contract Compliance",
     description: "Panel supplier and contract compliance"
+  },
+  {
+    icon: FaChartLine,
+    title: "Strategic Planning",
+    description: "Strategic analysts and business development specialists"
   }
 ];
 

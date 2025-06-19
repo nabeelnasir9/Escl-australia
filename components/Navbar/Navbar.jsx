@@ -19,7 +19,7 @@ const Navbar = () => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768); // md breakpoint
     };
-    
+
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
@@ -57,10 +57,16 @@ const Navbar = () => {
   ];
 
   const servicesItems = [
-    { name: "Labour Hire & Casual Staffing", href: "/services/labour-hire-casual-staffing" },
+    {
+      name: "Labour Hire & Casual Staffing",
+      href: "/services/labour-hire-casual-staffing",
+    },
     { name: "Permanent Recruitment", href: "/services/permanent-recruitment" },
     { name: "Government Staffing", href: "/services/government-staffing" },
-    { name: "HR & Workforce Consulting", href: "/services/hr-workforce-consulting" },
+    {
+      name: "HR & Workforce Consulting",
+      href: "/services/hr-workforce-consulting",
+    },
     { name: "Workplace Safety & WHS", href: "/services/workplace-safety-whs" },
     { name: "Training & Development", href: "/services/training-development" },
   ];
@@ -193,10 +199,10 @@ const Navbar = () => {
               >
                 <MdCall className="w-4 h-4 mr-2" />
                 <a
-                  href="tel:1300 000 000"
+                  href="tel:+61 439 349 190"
                   className="hover:opacity-80 transition-opacity font-bold italic"
                 >
-                  <span className="hidden md:inline">1300 000 000</span>
+                  <span className="hidden md:inline">+61 439 349 190</span>
                   {/* <span className="md:hidden">Call</span> */}
                 </a>
               </motion.div>
@@ -209,10 +215,12 @@ const Navbar = () => {
               >
                 <IoMail className="w-4 h-4 mr-2" />
                 <a
-                  href="mailto:info@eliteglobalservice.com"
+                  href="mailto:info@elitegsc.com"
                   className="hover:opacity-80 transition-opacity font-bold italic"
                 >
-                  <span className="hidden lg:inline">info@eliteglobalservice.com</span>
+                  <span className="hidden lg:inline">
+                  info@elitegsc.com
+                  </span>
                   <span className="lg:hidden hidden md:inline">Email</span>
                   <span className="md:hidden">✉</span>
                 </a>
@@ -338,7 +346,7 @@ const Navbar = () => {
                 transition={{ delay: 0.5 }}
               >
                 <Link
-                href=""
+                  href=""
                   className="hover:text-[#42568C] text-slate-900 font-medium text-[15px] flex items-center transition-colors duration-200"
                 >
                   SERVICES
@@ -420,7 +428,7 @@ const Navbar = () => {
                 transition={{ delay: 0.8 }}
               >
                 <Link
-                  href="/contact-us"
+                  href="/contact-general"
                   className="hover:text-[#42568C] text-slate-900 font-medium text-[15px] transition-colors duration-200"
                 >
                   CONTACT US
@@ -431,7 +439,7 @@ const Navbar = () => {
 
           {/* Get in Touch Button - Desktop */}
           <motion.div
-            className="hidden lg:flex"
+            className="hidden lg:flex gap-3"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4 }}
@@ -439,10 +447,19 @@ const Navbar = () => {
             <motion.div whileHover={{ scale: 1.0 }} whileTap={{ scale: 1.0 }}>
               <Link
                 href="/contact-us"
-                className="bg-[#42568C] text-white px-6 py-2.5 rounded-lg font-bold text-[14px] flex items-center gap-2 transition-all duration-200 hover:shadow-lg font-jakarta"
+                className="bg-transparent border border-[#42568C] text-[#42568C] px-3 py-2.5 rounded-lg font-bold text-[13px] flex items-center gap-2 transition-all duration-200 hover:shadow-lg font-jakarta"
               >
-                Get in Touch
-                <FiArrowRight className="w-4 h-4" />
+                For Employers
+                {/* <FiArrowRight className="w-4 h-4" /> */}
+              </Link>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.0 }} whileTap={{ scale: 1.0 }}>
+              <Link
+                href="/career"
+                className="bg-[#42568C] text-white px-3 py-2.5 rounded-lg font-bold text-[13px] flex items-center gap-2 transition-all duration-200 hover:shadow-lg font-jakarta"
+              >
+                For Job Seekers
+                {/* <FiArrowRight className="w-4 h-4" /> */}
               </Link>
             </motion.div>
           </motion.div>
@@ -639,7 +656,7 @@ const Navbar = () => {
                         transition={{ delay: 0.7 }}
                       >
                         <Link
-                          href="/contact-us"
+                          href="/contactus"
                           className="text-slate-900 font-medium text-[15px] block"
                           onClick={toggleMobileMenu}
                         >

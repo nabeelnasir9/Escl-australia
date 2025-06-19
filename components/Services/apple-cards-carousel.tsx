@@ -102,14 +102,14 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
         >
           <div
             className={cn(
-              "absolute right-0 z-[1000] h-auto w-[5%] overflow-hidden bg-gradient-to-l",
+              "absolute right-0 z-[1000] h-auto w-[5%] overflow-hidden bg-gradient-to-l"
             )}
           ></div>
 
           <div
             className={cn(
               "flex flex-row justify-start gap-4 pl-4",
-              "mx-auto max-w-7xl", // remove max-w-4xl if you want the carousel to span the full width of its container
+              "mx-auto max-w-7xl" // remove max-w-4xl if you want the carousel to span the full width of its container
             )}
           >
             {items.map((item, index) => (
@@ -135,7 +135,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
             ))}
           </div>
         </div>
-        {/* <div className="mr-10 flex justify-end gap-2">
+        <div className="flex justify-center gap-2">
           <button
             className="relative z-40 flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 disabled:opacity-50"
             onClick={scrollLeft}
@@ -150,7 +150,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
           >
             <IconArrowNarrowRight className="h-6 w-6 text-gray-500" />
           </button>
-        </div> */}
+        </div>
       </div>
     </CarouselContext.Provider>
   );
@@ -250,7 +250,7 @@ export const BlurImage = ({
       className={cn(
         "h-full w-full transition duration-300",
         // isLoading ? "blur-sm" : "blur-0",
-        className,
+        className
       )}
       onLoad={() => setLoading(false)}
       src={src as string}
@@ -258,7 +258,7 @@ export const BlurImage = ({
       height={height}
       loading="lazy"
       decoding="async"
-    //   blurDataURL={typeof src === "string" ? src : undefined}
+      //   blurDataURL={typeof src === "string" ? src : undefined}
       alt={alt ? alt : "Background of a beautiful view"}
       {...rest}
     />

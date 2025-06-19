@@ -48,6 +48,15 @@ export interface ContactFormData {
   shiftRequirements?: string;
 }
 
+// Interface for general contact form
+export interface GeneralContactFormData {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  companyName: string;
+  message: string;
+}
+
 // Function for sending job application emails
 export const sendJobApplicationEmail = async (data: JobApplicationData) => {
   const { name, email, phone, position, resumeBuffer, resumeFileName } = data;
@@ -205,6 +214,60 @@ export const sendContactFormEmail = async (data: ContactFormData) => {
     return { success: true };
   } catch (error) {
     console.error('Detailed contact form email error:', {
+      error,
+      message: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined
+    });
+    return { success: false, error };
+  }
+};
+
+// Function for sending general contact form emails
+export const sendGeneralContactEmail = async (data: GeneralContactFormData) => {
+  const { name, email, phoneNumber, companyName, message } = data;
+
+  // Verify SMTP configuration
+  if (!process.env.SMTP_HOST || !process.env.SMTP_PORT || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
+    console.error('Missing SMTP configuration:', {
+      host: process.env.SMTP_HOST,
+      port: process.env.SMTP_PORT,
+      user: process.env.SMTP_USER ? 'set' : 'missing',
+      pass: process.env.SMTP_PASS ? 'set' : 'missing'
+    });
+    return { success: false, error: new Error('SMTP configuration is incomplete') };
+  }
+
+  const mailOptions = {
+    from: process.env.SMTP_USER,
+    to: process.env.SMTP_USER,
+    subject: `New General Contact Form Submission from ${name}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h2 style="color: #333;">New General Contact Form Submission</h2>
+        <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin-bottom: 20px;">
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Phone Number:</strong> ${phoneNumber}</p>
+          <p><strong>Company Name:</strong> ${companyName}</p>
+          <p><strong>Message:</strong> ${message}</p>
+        </div>
+        <p style="margin-top: 20px; color: #666; font-size: 0.9em;">
+          This is an automated message from the general contact form.
+        </p>
+      </div>
+    `,
+  };
+
+  try {
+    console.log('Attempting to send general contact form email:', {
+      ...mailOptions,
+      html: 'HTML content present'
+    });
+    const info = await transporter.sendMail(mailOptions);
+    console.log('General contact form email sent successfully:', info);
+    return { success: true };
+  } catch (error) {
+    console.error('Detailed general contact form email error:', {
       error,
       message: error instanceof Error ? error.message : 'Unknown error',
       stack: error instanceof Error ? error.stack : undefined

@@ -1,4 +1,4 @@
-import ContactUsForm from "@/components/ContactUs/ContactUsForm";
+import GeneralContactForm from "@/components/ui/GeneralContactForm";
 import Footer from "@/components/Footer/Footer";
 import Banner from "@/components/ui/Banner";
 
@@ -6,7 +6,7 @@ export default function ContactUsPage() {
   return (
     <div className="min-h-screen py-12">
       <Banner
-        title="Looking For Staff?"
+        title="Contact Us"
         // subtitle="Discover our story, mission, and the passionate team behind our success"
         backgroundImage="/Contact-us.jpg"
         height="xl"
@@ -25,7 +25,7 @@ export default function ContactUsPage() {
           </p>
         </div> */}
         <div className="mt-12">
-          <ContactUsForm />
+          <GeneralContactForm />
         </div>
       </div>
       <Footer />

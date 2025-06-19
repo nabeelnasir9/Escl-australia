@@ -199,7 +199,7 @@ export default function ContactForm() {
                     aria-hidden="true"
                     className="size-6 shrink-0 text-indigo-200"
                   />
-                  <span className="ml-3">1300 000 000</span>
+                  <span className="ml-3">+61 439 349 190</span>
                 </dd>
                 <dt>
                   <span className="sr-only">Email</span>
@@ -209,7 +209,7 @@ export default function ContactForm() {
                     aria-hidden="true"
                     className="size-6 shrink-0 text-indigo-200"
                   />
-                  <span className="ml-3">info@eliteglobalservice.com</span>
+                  <span className="ml-3">info@elitegsc.com</span>
                 </dd>
               </dl>
             </div>
@@ -313,7 +313,7 @@ export default function ContactForm() {
                       className={`block w-full pl-10 rounded-md border ${
                         errors.phone ? "border-red-300" : "border-gray-300"
                       } px-4 py-3 text-gray-900 shadow-xs focus:border-indigo-500 focus:ring-indigo-500`}
-                      placeholder="+1 (555) 123-4567"
+                      placeholder="+61 X XXXX XXXX"
                     />
                   </div>
                   {errors.phone && (
@@ -344,7 +344,7 @@ export default function ContactForm() {
                       className={`block w-full pl-10 rounded-md border ${
                         errors.position ? "border-red-300" : "border-gray-300"
                       } px-4 py-3 text-gray-900 shadow-xs focus:border-indigo-500 focus:ring-indigo-500`}
-                      placeholder="e.g. Planning Engineer, Civil Engineer"
+                      placeholder=""
                     />
                   </div>
                   {errors.position && (

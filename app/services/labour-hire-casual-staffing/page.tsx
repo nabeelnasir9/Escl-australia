@@ -15,6 +15,7 @@ import {
   FaCogs,
   FaHardHat,
   FaConciergeBell,
+  FaTruck
 } from "react-icons/fa";
 
 const features = [
@@ -178,6 +179,15 @@ export default function LabourHirePage() {
                   Set-up crews, waitstaff
                 </p>
               </div>
+              <div className="rounded-xl group p-8 text-center bg-white text-[#42568C] hover:shadow-xl transition duration-300">
+    <FaTruck className="w-8 h-8 mb-6 mx-auto" />
+    <h3 className="text-lg font-semibold mb-3">
+      Transport & Logistics
+    </h3>
+    <p className="text-slate-600 text-sm leading-relaxed">
+      Drivers, delivery personnel, dispatchers
+    </p>
+  </div>
             </div>
           </div>
         </div>

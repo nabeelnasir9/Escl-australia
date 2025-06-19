@@ -31,13 +31,15 @@ const features = [
   {
     id: 1,
     name: "Workplace Investigations:",
-    description: "Professional workplace investigations with discretion and thoroughness",
+    description:
+      "Professional workplace investigations with discretion and thoroughness",
     icon: FaSearch,
   },
   {
     id: 2,
     name: "IR & Fair Work Advice:",
-    description: "Expert industrial relations and Fair Work compliance guidance",
+    description:
+      "Expert industrial relations and Fair Work compliance guidance",
     icon: FaGavel,
   },
   {
@@ -49,13 +51,15 @@ const features = [
   {
     id: 4,
     name: "Workforce Planning:",
-    description: "Strategic workforce planning aligned with business objectives",
+    description:
+      "Strategic workforce planning aligned with business objectives",
     icon: FaUsers,
   },
   {
     id: 5,
     name: "Policy Development:",
-    description: "Policy and procedure development tailored to your organization",
+    description:
+      "Policy and procedure development tailored to your organization",
     icon: FaFileAlt,
   },
   {
@@ -70,23 +74,23 @@ const clientTypes = [
   {
     icon: FaBuilding,
     title: "SMEs",
-    description: "SMEs needing occasional HR support"
+    description: "SMEs needing occasional HR support",
   },
   {
     icon: FaChartLine,
     title: "Growing Businesses",
-    description: "Growing businesses ready to formalise systems"
+    description: "Growing businesses ready to formalise systems",
   },
   {
     icon: FaUserTie,
     title: "HR Teams",
-    description: "HR teams seeking external guidance"
+    description: "HR teams seeking external guidance",
   },
   {
     icon: FaHandshake,
     title: "Complex Issues",
-    description: "Employers navigating complex people issues"
-  }
+    description: "Employers navigating complex people issues",
+  },
 ];
 
 export default function HRWorkforceConsultingPage() {
@@ -105,7 +109,8 @@ export default function HRWorkforceConsultingPage() {
         Strategic HR Support That Delivers Results
       </p>
       <p className="mx-auto mt-3 max-w-prose sm:text-md text-[13px] text-gray-500 text-center">
-        Our HR consultants help you resolve issues, improve performance, and grow with compliance and confidence.
+        Our HR consultants help you resolve issues, improve performance, and
+        grow with compliance and confidence.
       </p>
 
       {/* Our Expertise */}
@@ -121,7 +126,9 @@ export default function HRWorkforceConsultingPage() {
                   Our Expertise
                 </p>
                 <p className="mt-6 text-lg/8 text-gray-600">
-                  Our comprehensive HR consulting services address every aspect of people management, from sensitive workplace issues to strategic workforce planning and compliance.
+                  Our comprehensive HR consulting services address every aspect
+                  of people management, from sensitive workplace issues to
+                  strategic workforce planning and compliance.
                 </p>
                 <dl className="mt-10 max-w-xl space-y-6 text-base/7 text-gray-600 lg:max-w-none">
                   {features.map((feature) => (
@@ -173,7 +180,9 @@ export default function HRWorkforceConsultingPage() {
                 Who We Work With
               </h2>
               <p className="text-slate-300 text-sm leading-relaxed">
-                From small businesses to established organizations, we provide tailored HR consulting services that meet your specific needs and challenges.
+                From small businesses to established organizations, we provide
+                tailored HR consulting services that meet your specific needs
+                and challenges.
               </p>
             </div>
             <div className="grid lg:grid-cols-4 md:grid-cols-2 mx-auto gap-5">
@@ -344,7 +353,8 @@ export default function HRWorkforceConsultingPage() {
                 Fixed-fee Packages or Hourly Rates
               </h3>
               <p className="text-gray-600 text-sm">
-                Transparent pricing options to suit your budget and project scope
+                Transparent pricing options to suit your budget and project
+                scope
               </p>
             </div>
             <div className="text-center">
@@ -365,30 +375,6 @@ export default function HRWorkforceConsultingPage() {
       {/* Client Testimonial */}
       <section className="py-16 border-t-2 border-[#42568C] mb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-extrabold text-[#42568C] mb-4 uppercase italic">
-              What Clients Say
-            </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Real feedback from clients who have experienced the difference our HR consulting makes.
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center p-8 bg-[#42568C] rounded-xl shadow-sm hover:shadow-md transition duration-300 border border-[#42568C]">
-              <div className="w-16 h-16 bg-white text-[#42568C] rounded-full flex items-center justify-center mx-auto mb-6">
-                <FaQuoteLeft className="w-8 h-8" />
-              </div>
-              <blockquote className="text-xl text-white mb-6 italic">
-                &apos;Their team helped us resolve a sensitive employee issue with discretion and professionalism.&apos;
-              </blockquote>
-              <div className="border-t border-gray-200 pt-6">
-                <p className="text-white font-semibold uppercase italic">HR Manager</p>
-                <p className="text-white">Construction Firm</p>
-              </div>
-            </div>
-          </div>
-
           <div className="grid md:grid-cols-3 gap-8 mt-12">
             <div className="text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition duration-300 border border-[#42568C]">
               <div className="w-16 h-16 bg-[#42568C] text-white rounded-full flex items-center justify-center mx-auto mb-4">
@@ -422,7 +408,8 @@ export default function HRWorkforceConsultingPage() {
                 Measurable Results
               </h3>
               <p className="text-gray-600">
-                Strategic solutions that deliver improved performance and outcomes
+                Strategic solutions that deliver improved performance and
+                outcomes
               </p>
             </div>
           </div>

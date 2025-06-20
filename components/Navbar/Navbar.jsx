@@ -642,12 +642,27 @@ const Navbar = () => {
                       >
                         <Link
                           href="/career"
-                          className="text-slate-900 font-medium text-[15px] block"
+                          className="text-slate-900 font-medium text-[15px] block uppercase"
                           onClick={toggleMobileMenu}
                         >
-                          CAREER
+                          For Job Seekers
                         </Link>
                       </motion.div>
+                      <motion.div
+                        className="px-3 py-2 border-b border-gray-300"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.6 }}
+                      >
+                        <Link
+                          href="/contact-us"
+                          className="text-slate-900 font-medium text-[15px] block uppercase"
+                          onClick={toggleMobileMenu}
+                        >
+                          For Employers
+                        </Link>
+                      </motion.div>
+                      
 
                       <motion.div
                         className="px-3 py-2 border-b border-gray-300"
@@ -656,7 +671,7 @@ const Navbar = () => {
                         transition={{ delay: 0.7 }}
                       >
                         <Link
-                          href="/contactus"
+                          href="/contact-general"
                           className="text-slate-900 font-medium text-[15px] block"
                           onClick={toggleMobileMenu}
                         >

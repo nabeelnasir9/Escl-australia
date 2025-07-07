@@ -199,10 +199,10 @@ const Navbar = () => {
               >
                 <MdCall className="w-4 h-4 mr-2" />
                 <a
-                  href="tel:+61 439 349 190"
+                  href="tel:1800 300 872"
                   className="hover:opacity-80 transition-opacity font-bold italic"
                 >
-                  <span className="hidden md:inline">+61 439 349 190</span>
+                  <span className="hidden md:inline">1800 300 872</span>
                   {/* <span className="md:hidden">Call</span> */}
                 </a>
               </motion.div>

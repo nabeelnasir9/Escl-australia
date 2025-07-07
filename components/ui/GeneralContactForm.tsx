@@ -70,7 +70,7 @@ export default function GeneralContactForm() {
                 <div>
                   <div className="">
                     <p className="font-extrabold text-[#42568C] text-lg">Phone:</p>
-                    <p className="text-gray-600">+61 439 349 190</p>
+                    <p className="text-gray-600">1800 300 872</p>
                   </div>
                 </div>
               </div>

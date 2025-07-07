@@ -134,10 +134,10 @@ const Footer = () => {
                       Phone:
                     </p>
                     <Link 
-                      href="tel:+61 439 349 190"
+                      href="tel:1800 300 872"
                       className="hover:text-slate-900 transition-colors duration-200 text-sm sm:text-base lg:text-sm"
                     >
-                      +61 439 349 190
+                      1800 300 872
                     </Link>
                   </div>
                 </div>

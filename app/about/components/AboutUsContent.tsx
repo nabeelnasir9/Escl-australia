@@ -115,10 +115,10 @@ export default function AboutUsContent({ scrollTarget }: AboutUsContentProps) {
                       About Us{" "}
                     </span>{" "}
                     <h2 className="text-[#42568C] sm:text-3xl text-2xl font-extrabold leading-normal lg:text-start text-center">
-                      Elite Global Service Company – Your Workforce Partner
+                      Meta Talent – Your Workforce Partner
                     </h2>
                     <p className="text-gray-500 sm:text-base text-[12px] font-normal lg:text-justify text-justify">
-                      Welcome to Elite Global Service Company, your trusted
+                      Welcome to Meta Talent, your trusted
                       partner in connecting skilled professionals with
                       businesses across Australia. Specializing in workforce
                       solutions tailored to the unique needs of industries
@@ -130,7 +130,7 @@ export default function AboutUsContent({ scrollTarget }: AboutUsContentProps) {
                   </div>
                   <div className="w-full lg:justify-start justify-center items-center sm:gap-5 gap-5 flex flex-col">
                     <p className="text-gray-500 sm:text-base text-[12px] font-normal lg:text-justify text-justify">
-                      At Elite Global Service Company, we understand the
+                      At Meta Talent, we understand the
                       critical role the right people play in business success.
                       Our rigorous recruitment processes ensure that we deliver
                       reliable, motivated, and highly skilled workers who
@@ -140,7 +140,7 @@ export default function AboutUsContent({ scrollTarget }: AboutUsContentProps) {
                     <p className="text-gray-500 sm:text-base text-[12px] font-normal lg:text-justify text-justify">
                       Whether you’re a company looking for reliable, skilled
                       staff or an individual seeking rewarding employment
-                      opportunities, Elite Global Service Company is here to
+                      opportunities, Meta Talent is here to
                       facilitate meaningful connections and lasting
                       partnerships.
                     </p>
@@ -264,7 +264,7 @@ export default function AboutUsContent({ scrollTarget }: AboutUsContentProps) {
               Background, Expertise, and Industry Experience:
             </h2>
             <p className="text-gray-600 text-justify text-sm mt-5 mb-5">
-              Elite Global Service Company is a trusted provider of
+              Meta Talent is a trusted provider of
               comprehensive staffing solutions across diverse sectors including
               Manufacturing, Food Processing, Trades and Construction,
               Industrial, Office Staff, Professional, and Finance. With

@@ -55,7 +55,7 @@ const HeroCarousel = () => {
   );
 
   const handleCareerPage = () => {
-    router.push('/career');
+    router.push('/career-registration');
   };
 
   const handleContactPage = () => {

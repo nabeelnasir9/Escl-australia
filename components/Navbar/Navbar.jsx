@@ -249,8 +249,8 @@ const Navbar = () => {
                 src="/eclsa.png"
                 alt="logo"
                 width={534}
-                height={40}
-                className="w-[174px]"
+                height={140}
+                className="w-[234px]"
               />
             </Link>
           </motion.div>
@@ -416,7 +416,7 @@ const Navbar = () => {
                 transition={{ delay: 0.7 }}
               >
                 <Link
-                  href="/career"
+                  href="/career-registration"
                   className="hover:text-[#42568C] text-slate-900 font-medium text-[15px] transition-colors duration-200"
                 >
                   CAREER
@@ -455,7 +455,7 @@ const Navbar = () => {
             </motion.div>
             <motion.div whileHover={{ scale: 1.0 }} whileTap={{ scale: 1.0 }}>
               <Link
-                href="/career"
+                href="/career-registration"
                 className="bg-[#42568C] text-white px-3 py-2.5 rounded-lg font-bold text-[13px] flex items-center gap-2 transition-all duration-200 hover:shadow-lg font-jakarta"
               >
                 For Job Seekers
@@ -534,7 +534,7 @@ const Navbar = () => {
                           alt="logo"
                           width={534}
                           height={40}
-                          className="w-[174px]"
+                          className="w-[254px]"
                         />
                       </Link>
                     </motion.div>
@@ -641,7 +641,7 @@ const Navbar = () => {
                         transition={{ delay: 0.6 }}
                       >
                         <Link
-                          href="/career"
+                          href="/career-registration"
                           className="text-slate-900 font-medium text-[15px] block uppercase"
                           onClick={toggleMobileMenu}
                         >

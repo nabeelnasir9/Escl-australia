@@ -8,7 +8,6 @@ export default function ContactPage() {
     <div className="min-h-screen py-12">
       <Banner
         title="Careers"
-        // subtitle="Discover our story, mission, and the passionate team behind our success"
         backgroundImage="/Career-us.jpg"
         height="xl"
         priority={true} // Above the fold image

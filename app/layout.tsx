@@ -2,7 +2,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
-// import Footer from "@/components/Footer/Footer";
 import {
   Bricolage_Grotesque,
   Plus_Jakarta_Sans,
@@ -51,9 +50,9 @@ const bangers = Bangers({
 });
 
 export const metadata: Metadata = {
-  title: "Elite Global Service Company – Your Workforce Partner",
+  title: "Meta Talent – Your Workforce Partner",
   description:
-    "Elite Global Service Company delivers professional industrial services. Specializing in plant maintenance, shutdowns & turnarounds, industrial cleaning, equipment servicing, and commissioning for oil & gas, petrochemical, steel and fertilizer industries.",
+    "Meta Talent delivers professional industrial services. Specializing in plant maintenance, shutdowns & turnarounds, industrial cleaning, equipment servicing, and commissioning for oil & gas, petrochemical, steel and fertilizer industries.",
 };
 
 export default function RootLayout({

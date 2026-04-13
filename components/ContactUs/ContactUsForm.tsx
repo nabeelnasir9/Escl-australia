@@ -180,9 +180,45 @@ export default function ContactUsForm() {
             Looking for Staff
           </h1>
           <p className="mt-4 text-md text-black italic">
-            Please fill in the below information for an EGSC Workforce
+            Please fill in the below information for an Meta Talent Workforce
             representative to contact regarding your requirements.
           </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+          <div className="flex items-start gap-3 rounded-2xl border border-[#42568C] bg-white/80 p-5 backdrop-blur-sm">
+            <div className="rounded-lg bg-[#42568C20] p-2">
+              <FiPhone className="h-5 w-5 text-[#42568C]" />
+            </div>
+            <div>
+              <p className="text-sm font-bold text-slate-800 uppercase tracking-wide">
+                Phone
+              </p>
+              <a
+                href="tel:+61370676656"
+                className="mt-1 inline-block text-slate-600 transition-colors hover:text-[#42568C]"
+              >
+                +61 03 7067 6656
+              </a>
+            </div>
+          </div>
+          <div className="flex items-start gap-3 rounded-2xl border border-[#42568C] bg-white/80 p-5 backdrop-blur-sm">
+            <div className="rounded-lg bg-[#42568C20] p-2">
+              <FiMapPin className="h-5 w-5 text-[#42568C]" />
+            </div>
+            <div>
+              <p className="text-sm font-bold text-slate-800 uppercase tracking-wide">
+                Office
+              </p>
+              <p className="mt-1 text-slate-600 leading-relaxed text-sm">
+                Office 4346, Ground floor
+                <br />
+                470 St Kilda Road
+                <br />
+                Melbourne VIC 3004
+              </p>
+            </div>
+          </div>
         </div>
 
         <div className="space-y-8">

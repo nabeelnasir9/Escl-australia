@@ -20,7 +20,7 @@ const Footer = () => {
 
   const companyItems = [
     ...aboutItems,
-    { name: "Careers", href: "/career" },
+    { name: "Careers", href: "/career-registration" },
     { name: "Contact Us", href: "/contact-us" },
   ];
 
@@ -36,12 +36,12 @@ const Footer = () => {
                 alt="ESLCSA logo"
                 width={244}
                 height={140}
-                className="w-auto h-20 sm:h-20 lg:h-22"
+                className="w-auto h-16 sm:h-16 lg:h-16"
               />
             </Link>
             <div className="mt-4 sm:mt-6">
               <p className="text-slate-600 leading-relaxed text-sm sm:text-base lg:text-sm">
-              EGSC delivers innovative industrial long-lasting solutions at a
+              Meta Talent delivers innovative industrial long-lasting solutions at a
                 high standard of quality, economy and at the delivery time you
                 require.
               </p>
@@ -101,7 +101,7 @@ const Footer = () => {
                       Locations:
                     </p>
                     <p className="leading-relaxed text-sm sm:text-base lg:text-sm">
-                    C4 Level 1, 2 Main Street Point Cook, VIC 3030
+                      Office 4346, Ground floor, 470 St Kilda Road, Melbourne VIC 3004
                     </p>
                   </div>
                 </div>
@@ -133,11 +133,11 @@ const Footer = () => {
                     <p className="font-medium text-slate-700 text-sm sm:text-base lg:text-sm mb-1">
                       Phone:
                     </p>
-                    <Link 
-                      href="tel:+61 1800 300 872"
+                    <Link
+                      href="tel:+61370676656"
                       className="hover:text-slate-900 transition-colors duration-200 text-sm sm:text-base lg:text-sm"
                     >
-                     +61 1800 300 872
+                      +61 03 7067 6656
                     </Link>
                   </div>
                 </div>
@@ -150,7 +150,7 @@ const Footer = () => {
 
         <div className="text-center">
           <p className="text-[#42568C] text-xs sm:text-sm font-medium italic">
-            Copyright ©2025 EGSC. All Rights Reserved.
+            Copyright ©2026 Meta Talent. All Rights Reserved.
           </p>
         </div>
       </div>

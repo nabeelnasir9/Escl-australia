@@ -89,7 +89,7 @@ export default function GeneralContactForm() {
                 </div>
                 <div>
                   <p className="font-extrabold text-[#42568C] text-lg">E-mail:</p>
-                  <p className="text-gray-600">info@elitegsc.com</p>
+                  <p className="text-gray-600">info@metatalent.com.au</p>
                 </div>
               </div>
             </div>

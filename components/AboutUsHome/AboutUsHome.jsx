@@ -34,10 +34,10 @@ const AboutUsHome = () => {
           About Us{" "}
         </span>{" "}
                 <h2 className="text-[#42568C] sm:text-3xl text-2xl font-extrabold leading-normal lg:text-start text-center">
-                  Elite Global Service Company – Your Workforce Partner
+                  Meta Talent – Your Workforce Partner
                 </h2>
                 <p className="text-gray-500 sm:text-base text-[12px] font-normal lg:text-justify text-justify">
-                  Welcome to Elite Global Service Company, your trusted partner
+                  Welcome to Meta Talent, your trusted partner
                   in connecting skilled professionals with businesses across
                   Australia. Specializing in workforce solutions tailored to the
                   unique needs of industries including Manufacturing, Food
@@ -48,7 +48,7 @@ const AboutUsHome = () => {
               </div>
               <div className="w-full lg:justify-start justify-center items-center sm:gap-5 gap-5 flex flex-col">
                 <p className="text-gray-500 sm:text-base text-[12px] font-normal lg:text-justify text-justify">
-                  At Elite Global Service Company, we understand the critical
+                  At Meta Talent, we understand the critical
                   role the right people play in business success. Our rigorous
                   recruitment processes ensure that we deliver reliable,
                   motivated, and highly skilled workers who seamlessly integrate

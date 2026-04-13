@@ -4,7 +4,7 @@ export default function CTA() {
       <div className="px-6 py-24 sm:px-6 sm:py-32 lg:px-8">
         <div className="mx-auto max-w-6xl text-center">
           <h2 className="text-2xl font-extrabold text-balance text-white sm:text-5xl">
-          Elite Global Service Company - Complete Staffing Solutions{" "}
+          Meta Talent - Complete Staffing Solutions{" "}
           </h2>
           <p className="mx-auto mt-6 max-w-4xl text-white sm:text-[15px] text-[13px] sm:text-center text-justify">
             Our comprehensive services span labour hire and casual staffing,
@@ -17,7 +17,7 @@ export default function CTA() {
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <a
-              href="/career"
+              href="/career-registration"
               className="rounded-md bg-white px-3.5 py-2.5 sm:text-sm text-[12px] font-semibold text-[#42568C] shadow-xs hover:bg-gray-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               Looking for Work?

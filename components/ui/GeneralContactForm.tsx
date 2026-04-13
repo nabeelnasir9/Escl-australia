@@ -70,7 +70,12 @@ export default function GeneralContactForm() {
                 <div>
                   <div className="">
                     <p className="font-extrabold text-[#42568C] text-lg">Phone:</p>
-                    <p className="text-gray-600">+61 1800 300 872</p>
+                    <a
+                      href="tel:+61370676656"
+                      className="text-gray-600 hover:text-[#42568C] transition-colors"
+                    >
+                      +61 03 7067 6656
+                    </a>
                   </div>
                 </div>
               </div>
@@ -98,7 +103,7 @@ export default function GeneralContactForm() {
                 <div>
                   <p className="font-extrabold text-[#42568C] text-lg">Locations:</p>
                   <p className="text-gray-600 leading-relaxed">
-                  C4 Level 1, 2 Main Street Point Cook, VIC 3030
+                  Office 4346, Ground floor, 470 St Kilda Road, Melbourne VIC 3004
                   </p>
                 </div>
               </div>

@@ -211,11 +211,7 @@ export default function ContactUsForm() {
                 Office
               </p>
               <p className="mt-1 text-slate-600 leading-relaxed text-sm">
-                Office 4346, Ground floor
-                <br />
-                470 St Kilda Road
-                <br />
-                Melbourne VIC 3004
+                Office 4346, Ground floor, 470 St Kilda Road, Melbourne VIC 3004
               </p>
             </div>
           </div>

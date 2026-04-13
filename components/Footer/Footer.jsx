@@ -116,10 +116,10 @@ const Footer = () => {
                       Email:
                     </p>
                     <Link 
-                      href="mailto:info@elitegsc.com"
+                      href="mailto:info@metatalent.com.au"
                       className="hover:text-slate-900 transition-colors duration-200 text-sm sm:text-base lg:text-sm break-all"
                     >
-                      info@elitegsc.com
+                      info@metatalent.com.au
                     </Link>
                   </div>
                 </div>

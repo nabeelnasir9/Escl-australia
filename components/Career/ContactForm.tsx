@@ -209,7 +209,7 @@ export default function ContactForm() {
                     aria-hidden="true"
                     className="size-6 shrink-0 text-indigo-200"
                   />
-                  <span className="ml-3">info@elitegsc.com</span>
+                  <span className="ml-3">info@metatalent.com.au</span>
                 </dd>
               </dl>
             </div>

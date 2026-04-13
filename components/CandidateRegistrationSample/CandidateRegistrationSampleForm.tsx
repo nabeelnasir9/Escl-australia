@@ -30,7 +30,7 @@ import {
 import CandidateSignatureField from "./CandidateSignatureField";
 
 const DASHBOARD_URL =
-  process.env.NEXT_PUBLIC_DASHBOARD_URL ?? "http://localhost:3001";
+  process.env.NEXT_PUBLIC_DASHBOARD_URL;
 
 const VISA_STATUSES = [
   "Working Visa",
@@ -1582,6 +1582,8 @@ export default function CandidateRegistrationSampleForm() {
   const [residentialStatus, setResidentialStatus] = useState("");
   const [noOwnSuper, setNoOwnSuper] = useState(false);
   const [activeSection, setActiveSection] = useState("sec-personal");
+  /** Increment when the user dismisses the success modal to remount the form and clear controlled child state (BSB, files, signature, WHS, etc.). */
+  const [formRemountKey, setFormRemountKey] = useState(0);
   const formRef = useRef<HTMLFormElement>(null);
   const showModal = submitting || success || !!submitError;
 
@@ -1940,9 +1942,6 @@ export default function CandidateRegistrationSampleForm() {
       await new Promise((r) => setTimeout(r, 600));
       setSuccess(true);
       setSubmitting(false);
-      form.reset();
-      setResidentialStatus("");
-      setNoOwnSuper(false);
     } catch (err: unknown) {
       setSubmitError(
         err instanceof Error ? err.message : "An unexpected error occurred."
@@ -1960,8 +1959,18 @@ export default function CandidateRegistrationSampleForm() {
           isSuccess={success}
           error={submitError}
           onClose={() => {
+            const wasSuccess = success;
             setSuccess(false);
             setSubmitError(null);
+            setSteps([]);
+            if (wasSuccess) {
+              // Full reset like a page reload (controlled fields, files, signature, WHS, etc.)
+              setFormRemountKey((k) => k + 1);
+              setResidentialStatus("");
+              setNoOwnSuper(false);
+              setActiveSection("sec-personal");
+              window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+            }
           }}
         />
       )}
@@ -2009,6 +2018,7 @@ export default function CandidateRegistrationSampleForm() {
 
         {/* Form */}
         <form
+          key={formRemountKey}
           ref={setupObserver}
           className="space-y-8 min-w-0 flex-1"
           onSubmit={handleSubmit}

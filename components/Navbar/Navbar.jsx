@@ -199,10 +199,10 @@ const Navbar = () => {
               >
                 <MdCall className="w-4 h-4 mr-2" />
                 <a
-                  href="tel:+61 1800 300 872"
+                  href="tel:+61370676656"
                   className="hover:opacity-80 transition-opacity font-bold italic"
                 >
-                  <span className="hidden md:inline">+61 1800 300 872</span>
+                  <span className="hidden md:inline">+61 03 7067 6656</span>
                   {/* <span className="md:hidden">Call</span> */}
                 </a>
               </motion.div>
@@ -215,11 +215,11 @@ const Navbar = () => {
               >
                 <IoMail className="w-4 h-4 mr-2" />
                 <a
-                  href="mailto:info@elitegsc.com"
+                  href="mailto:info@metatalent.com.au"
                   className="hover:opacity-80 transition-opacity font-bold italic"
                 >
                   <span className="hidden lg:inline">
-                  info@elitegsc.com
+                  info@metatalent.com.au
                   </span>
                   <span className="lg:hidden hidden md:inline">Email</span>
                   <span className="md:hidden">✉</span>

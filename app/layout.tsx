@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
@@ -52,7 +51,7 @@ const bangers = Bangers({
 export const metadata: Metadata = {
   title: "Meta Talent – Your Workforce Partner",
   description:
-    "Meta Talent delivers professional industrial services. Specializing in plant maintenance, shutdowns & turnarounds, industrial cleaning, equipment servicing, and commissioning for oil & gas, petrochemical, steel and fertilizer industries.",
+    "Meta Talent delivers professional workforce solutions. Specializing in labour hire, permanent recruitment, government staffing, HR consulting, workplace safety, and training across Australia.",
 };
 
 export default function RootLayout({

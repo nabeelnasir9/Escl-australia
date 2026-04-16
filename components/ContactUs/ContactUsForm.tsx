@@ -213,6 +213,14 @@ export default function ContactUsForm() {
               <p className="mt-1 text-slate-600 leading-relaxed text-sm">
                 Office 4346, Ground floor, 470 St Kilda Road, Melbourne VIC 3004
               </p>
+              <a
+                href="https://maps.app.goo.gl/qkQWzGABu7QVMGXV9?g_st=ic"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 inline-block text-sm font-medium text-[#42568C] transition-colors hover:text-slate-900"
+              >
+                Open in Google Maps
+              </a>
             </div>
           </div>
         </div>

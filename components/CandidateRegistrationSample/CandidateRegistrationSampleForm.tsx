@@ -2294,7 +2294,7 @@ export default function CandidateRegistrationSampleForm() {
               <SmartFileField
                 id="evoCheck"
                 name="evoCheck"
-                label="Attach Evo Check"
+                label="Attach Vevo Check"
               />
             </div>
           </SectionCard>

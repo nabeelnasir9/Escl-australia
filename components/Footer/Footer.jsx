@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Mail, Phone } from "lucide-react";
+import { MdOutlineWhatsapp } from "react-icons/md";
 
 const Footer = () => {
   const servicesItems = [
@@ -139,6 +140,17 @@ const Footer = () => {
                     >
                       +61 03 7067 6656
                     </Link>
+                    <div className="mt-3">
+                      <Link
+                        href="https://wa.me/61370676656"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-md bg-[#25D366] px-3 py-1.5 text-xs sm:text-sm font-semibold text-white transition-opacity duration-200 hover:opacity-90"
+                      >
+                        <MdOutlineWhatsapp className="h-4 w-4" />
+                        WhatsApp
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>

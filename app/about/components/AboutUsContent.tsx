@@ -268,7 +268,7 @@ export default function AboutUsContent({ scrollTarget }: AboutUsContentProps) {
               comprehensive staffing solutions across diverse sectors including
               Manufacturing, Food Processing, Trades and Construction,
               Industrial, Office Staff, Professional, and Finance. With
-              operational presence in both Australia and Saudi Arabia, our deep
+              operational presence in Australia, our deep
               industry knowledge and extensive network enable us to precisely
               match the right candidates with the right opportunities, enhancing
               efficiency and productivity for our partners.

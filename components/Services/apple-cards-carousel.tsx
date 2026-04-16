@@ -22,6 +22,8 @@ import { useRouter } from "next/navigation";
 interface CarouselProps {
   items: JSX.Element[];
   initialScroll?: number;
+  autoPlay?: boolean;
+  autoPlayIntervalMs?: number;
 }
 
 type Card = {
@@ -40,7 +42,12 @@ export const CarouselContext = createContext<{
   currentIndex: 0,
 });
 
-export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
+export const Carousel = ({
+  items,
+  initialScroll = 0,
+  autoPlay = true,
+  autoPlayIntervalMs = 3500,
+}: CarouselProps) => {
   const carouselRef = React.useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = React.useState(false);
   const [canScrollRight, setCanScrollRight] = React.useState(true);
@@ -52,6 +59,30 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
       checkScrollability();
     }
   }, [initialScroll]);
+
+  useEffect(() => {
+    if (!autoPlay || items.length <= 1) {
+      return;
+    }
+
+    const intervalId = window.setInterval(() => {
+      const carousel = carouselRef.current;
+      if (!carousel) {
+        return;
+      }
+
+      const step = isMobile() ? 240 : 392;
+      const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
+      const nextScrollLeft = carousel.scrollLeft + step;
+
+      carousel.scrollTo({
+        left: nextScrollLeft >= maxScrollLeft ? 0 : nextScrollLeft,
+        behavior: "smooth",
+      });
+    }, autoPlayIntervalMs);
+
+    return () => window.clearInterval(intervalId);
+  }, [autoPlay, autoPlayIntervalMs, items.length]);
 
   const checkScrollability = () => {
     if (carouselRef.current) {

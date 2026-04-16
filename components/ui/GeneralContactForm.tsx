@@ -108,6 +108,18 @@ export default function GeneralContactForm() {
                 </div>
               </div>
             </div>
+
+            <div className="overflow-hidden rounded-xl border border-[#42568C] bg-white">
+              <iframe
+                title="Meta Talent Office Location"
+                src="https://www.google.com/maps?q=Office+4346,+Ground+floor,+470+St+Kilda+Road,+Melbourne+VIC+3004&output=embed"
+                width="100%"
+                height="220"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="block"
+              />
+            </div>
           </div>
 
           {/* Right Side - Contact Form */}

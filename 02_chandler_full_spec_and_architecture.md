@@ -1,4 +1,4 @@
-# Chandler Recruitment — Full Specification, Backend Architecture & Dashboard
+# Meta Talent Recruitment — Full Specification, Backend Architecture & Dashboard
 
 ---
 
@@ -594,12 +594,12 @@ REFRESH_TOKEN_EXPIRES_IN=7d
 R2_ACCOUNT_ID=
 R2_ACCESS_KEY_ID=
 R2_SECRET_ACCESS_KEY=
-R2_BUCKET_NAME=chandler-recruitment
+R2_BUCKET_NAME=metatalent-recruitment
 R2_PUBLIC_URL=https://files.yourdomain.com
 
 # Email (Resend)
 RESEND_API_KEY=re_***
-EMAIL_FROM=noreply@chandlerpersonnel.com.au
+EMAIL_FROM=noreply@metatalent.com.au
 
 # App
 NEXT_PUBLIC_APP_URL=http://localhost:3001

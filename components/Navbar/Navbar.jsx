@@ -202,7 +202,7 @@ const Navbar = () => {
                   href="tel:+61370676656"
                   className="hover:opacity-80 transition-opacity font-bold italic"
                 >
-                  <span className="hidden md:inline">+61 03 7067 6656</span>
+                  <span className="hidden md:inline">+61 3 7067 6656</span>
                   {/* <span className="md:hidden">Call</span> */}
                 </a>
               </motion.div>

@@ -1,4 +1,4 @@
-# Chandler Recruitment — Candidate Registration Form
+# Meta Talent Recruitment — Candidate Registration Form
 
 **Spec version:** 2.0 (synced with actual code)
 **Source files:**
@@ -197,7 +197,7 @@
 ## 11. Health Questionnaire
 
 > **Health intro** (`HEALTH_INTRO` constant):
-> Health and safety of our employees is of utmost importance to chandler recruitment. This questionnaire is designed to assist us in ensuring that our employees are only placed in the assignments which they are capable of performing efficiently and in a safely manner.
+> Health and safety of our employees is of utmost importance to meta talent recruitment. This questionnaire is designed to assist us in ensuring that our employees are only placed in the assignments which they are capable of performing efficiently and in a safely manner.
 >
 > **Injury declaration** (`INJURY_DECLARATION` constant):
 > You are required to disclose any pre-existing injuries, illnesses or diseases that could be aggravated by your work duties. Failure to disclose may void workers' compensation entitlements.

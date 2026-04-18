@@ -74,7 +74,7 @@ export default function GeneralContactForm() {
                       href="tel:+61370676656"
                       className="text-gray-600 hover:text-[#42568C] transition-colors"
                     >
-                      +61 03 7067 6656
+                      +61 3 7067 6656
                     </a>
                   </div>
                 </div>

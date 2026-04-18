@@ -198,7 +198,7 @@ export default function ContactUsForm() {
                 href="tel:+61370676656"
                 className="mt-1 inline-block text-slate-600 transition-colors hover:text-[#42568C]"
               >
-                +61 03 7067 6656
+                +61 3 7067 6656
               </a>
             </div>
           </div>

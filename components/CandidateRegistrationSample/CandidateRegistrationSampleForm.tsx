@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, createContext, useContext, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   User,
@@ -31,6 +31,16 @@ import CandidateSignatureField from "./CandidateSignatureField";
 
 const DASHBOARD_URL =
   process.env.NEXT_PUBLIC_DASHBOARD_URL;
+
+// Context to propagate field-level errors without prop-drilling
+const ErrorCtx = createContext<{ errors: Set<string>; clear: (n: string) => void }>({
+  errors: new Set(),
+  clear: () => {},
+});
+function useFieldError(name: string) {
+  const { errors, clear } = useContext(ErrorCtx);
+  return { hasError: errors.has(name), clearError: () => clear(name) };
+}
 
 const VISA_STATUSES = [
   "Working Visa",
@@ -498,9 +508,11 @@ function StepLoaderModal({
 function FieldLabel({
   htmlFor,
   children,
+  required,
 }: {
   htmlFor?: string;
   children: React.ReactNode;
+  required?: boolean;
 }) {
   return (
     <label
@@ -508,6 +520,7 @@ function FieldLabel({
       className="block text-sm font-medium text-gray-800 mb-1"
     >
       {children}
+      {required && <span className="text-red-500 ml-0.5">*</span>}
     </label>
   );
 }
@@ -529,6 +542,7 @@ function TextInput({
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
+  const { hasError, clearError } = useFieldError(name);
   return (
     <input
       id={id}
@@ -537,37 +551,18 @@ function TextInput({
       placeholder={placeholder}
       defaultValue={defaultValue}
       value={value}
-      onChange={onChange}
-      className="w-full rounded border border-gray-300 px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+      onChange={(e) => {
+        clearError();
+        onChange?.(e);
+      }}
+      className={`w-full rounded border px-3 py-2 text-sm text-gray-900 shadow-sm focus:outline-none focus:ring-1 ${
+        hasError
+          ? "border-red-500 focus:border-red-500 focus:ring-red-500 bg-red-50"
+          : "border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+      }`}
     />
   );
 }
-
-const fieldControlClass =
-  "w-full rounded border border-gray-300 px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500";
-
-function TextArea({
-  id,
-  name,
-  placeholder,
-  rows = 4,
-}: {
-  id: string;
-  name: string;
-  placeholder?: string;
-  rows?: number;
-}) {
-  return (
-    <textarea
-      id={id}
-      name={name}
-      rows={rows}
-      placeholder={placeholder}
-      className={`${fieldControlClass} resize-y min-h-[96px]`}
-    />
-  );
-}
-
 function YesNoRow({ name, label }: { name: string; label: string }) {
   return (
     <div className="flex flex-col gap-2 border-b border-gray-100 pb-3">
@@ -1327,19 +1322,23 @@ function SmartFileField({
   id,
   name,
   label,
+  required,
 }: {
   id: string;
   name: string;
   label: string;
+  required?: boolean;
 }) {
   const [file, setFile] = useState<File | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { hasError, clearError } = useFieldError(name);
 
   const ext = file ? file.name.split(".").pop() ?? "" : "";
   const { color, bg } = getExtColor(ext);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setFile(e.target.files?.[0] ?? null);
+    clearError();
   }
 
   function handleRemove() {
@@ -1348,8 +1347,8 @@ function SmartFileField({
   }
 
   return (
-    <div>
-      <FieldLabel htmlFor={id}>{label}</FieldLabel>
+    <div id={`${name}-upload-zone`}>
+      <FieldLabel htmlFor={id} required={required}>{label}</FieldLabel>
 
       {/* Single input always in DOM — browser keeps its files list intact */}
       <input
@@ -1430,18 +1429,18 @@ function SmartFileField({
             gap: 8,
             padding: "8px 10px",
             borderRadius: 8,
-            border: "1.5px dashed #cbd5e1",
-            background: "#f8fafc",
+            border: hasError ? "1.5px dashed #ef4444" : "1.5px dashed #cbd5e1",
+            background: hasError ? "#fef2f2" : "#f8fafc",
             cursor: "pointer",
             transition: "border-color 0.15s, background 0.15s",
           }}
           onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.borderColor = "#42568C";
-            (e.currentTarget as HTMLElement).style.background = "#f0f4ff";
+            (e.currentTarget as HTMLElement).style.borderColor = hasError ? "#dc2626" : "#42568C";
+            (e.currentTarget as HTMLElement).style.background = hasError ? "#fee2e2" : "#f0f4ff";
           }}
           onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.borderColor = "#cbd5e1";
-            (e.currentTarget as HTMLElement).style.background = "#f8fafc";
+            (e.currentTarget as HTMLElement).style.borderColor = hasError ? "#ef4444" : "#cbd5e1";
+            (e.currentTarget as HTMLElement).style.background = hasError ? "#fef2f2" : "#f8fafc";
           }}
         >
           <svg
@@ -1572,6 +1571,271 @@ function FormSidebar({ activeId, onScrollTo }: { activeId: string; onScrollTo: (
   );
 }
 
+const LOCATIONIQ_KEY = process.env.NEXT_PUBLIC_LOCATIONIQ_KEY ?? "";
+
+interface LocationIQResult {
+  display_name: string;
+  display_place: string;
+  display_address?: string;
+  address: {
+    house_number?: string;
+    road?: string;
+    suburb?: string;
+    city?: string;
+    town?: string;
+    village?: string;
+    state?: string;
+    postcode?: string;
+    name?: string;
+  };
+}
+
+function AddressAutocomplete() {
+  const { hasError, clearError } = useFieldError("fullAddress");
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState<LocationIQResult[]>([]);
+  const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState("");
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  // hidden inputs refs for form submission
+  const fullAddressRef = useRef<HTMLInputElement>(null);
+  const streetNumberRef = useRef<HTMLInputElement>(null);
+  const streetNameRef = useRef<HTMLInputElement>(null);
+  const suburbRef = useRef<HTMLInputElement>(null);
+  const stateRef = useRef<HTMLInputElement>(null);
+  const postcodeRef = useRef<HTMLInputElement>(null);
+
+  // close dropdown on outside click
+  useEffect(() => {
+    function onClickOutside(e: MouseEvent) {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
+  }, []);
+
+  function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
+    const val = e.target.value;
+    setQuery(val);
+    setSelected("");
+    clearError();
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    if (val.length < 3) { setResults([]); setOpen(false); return; }
+    debounceRef.current = setTimeout(async () => {
+      try {
+        const res = await fetch(
+          `https://api.locationiq.com/v1/autocomplete?key=${LOCATIONIQ_KEY}&q=${encodeURIComponent(val)}&limit=6&dedupe=1&countrycodes=au&tag=place:house,highway:residential,place:road`
+        );
+        const data: LocationIQResult[] = await res.json();
+        if (Array.isArray(data)) { setResults(data); setOpen(true); }
+      } catch { /* ignore */ }
+    }, 400);
+  }
+
+  function handleSelect(item: LocationIQResult) {
+    const addr = item.address;
+    const streetNum = addr.house_number ?? "";
+    const streetName = addr.road ?? addr.name ?? "";
+    const suburb = addr.suburb ?? addr.city ?? addr.town ?? addr.village ?? "";
+    const state = addr.state ?? "";
+    const postcode = addr.postcode ?? "";
+    const full = item.display_name;
+
+    setQuery(full);
+    setSelected(full);
+    setOpen(false);
+    setResults([]);
+
+    if (fullAddressRef.current)   fullAddressRef.current.value   = full;
+    if (streetNumberRef.current)  streetNumberRef.current.value  = streetNum;
+    if (streetNameRef.current)    streetNameRef.current.value    = streetName;
+    if (suburbRef.current)        suburbRef.current.value        = suburb;
+    if (stateRef.current)         stateRef.current.value         = state;
+    if (postcodeRef.current)      postcodeRef.current.value      = postcode;
+    clearError();
+  }
+
+  return (
+    <div className="mt-4 space-y-4">
+      {/* Autocomplete search box */}
+      <div ref={wrapperRef} className="relative">
+        <FieldLabel htmlFor="fullAddress" required>Full Address</FieldLabel>
+        <input
+          id="fullAddress"
+          type="text"
+          autoComplete="off"
+          placeholder="Start typing your address..."
+          value={query}
+          onChange={handleInput}
+          onFocus={() => results.length > 0 && setOpen(true)}
+          className={`w-full rounded border px-3 py-2 text-sm text-gray-900 shadow-sm focus:outline-none focus:ring-1 ${
+            hasError
+              ? "border-red-500 focus:border-red-500 focus:ring-red-500 bg-red-50"
+              : "border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+          }`}
+        />
+        {/* hidden input carries the value for FormData */}
+        <input ref={fullAddressRef} type="hidden" name="fullAddress" value={selected || query} />
+
+        {open && results.length > 0 && (
+          <ul
+            className="absolute z-50 mt-1 w-full rounded-lg border border-gray-200 bg-white shadow-lg overflow-hidden"
+            style={{ maxHeight: 260, overflowY: "auto" }}
+          >
+            {results.map((item, i) => (
+              <li
+                key={i}
+                onMouseDown={() => handleSelect(item)}
+                className="flex flex-col px-3 py-2 cursor-pointer hover:bg-blue-50 border-b border-gray-100 last:border-0"
+              >
+                <span className="text-sm font-semibold text-gray-800">{item.display_place}</span>
+                <span className="text-xs text-gray-500 truncate">{item.display_address ?? item.display_name}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      {/* Editable fields — pre-filled by autocomplete, user can still edit */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div>
+          <FieldLabel htmlFor="unitNumber">Unit Number</FieldLabel>
+          <input
+            id="unitNumber"
+            name="unitNumber"
+            type="text"
+            placeholder="Unit Number"
+            className="w-full rounded border border-gray-300 px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          />
+        </div>
+        <div>
+          <FieldLabel htmlFor="streetNumber">Street Number</FieldLabel>
+          <input
+            ref={streetNumberRef}
+            id="streetNumber"
+            name="streetNumber"
+            type="text"
+            placeholder="Street No"
+            className="w-full rounded border border-gray-300 px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          />
+        </div>
+        <div>
+          <FieldLabel htmlFor="streetName">Street Name</FieldLabel>
+          <input
+            ref={streetNameRef}
+            id="streetName"
+            name="streetName"
+            type="text"
+            placeholder="Street Name"
+            className="w-full rounded border border-gray-300 px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          />
+        </div>
+        <div>
+          <FieldLabel htmlFor="suburb">Suburb</FieldLabel>
+          <input
+            ref={suburbRef}
+            id="suburb"
+            name="suburb"
+            type="text"
+            placeholder="Suburb"
+            className="w-full rounded border border-gray-300 px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          />
+        </div>
+        <div>
+          <FieldLabel htmlFor="state">State</FieldLabel>
+          <input
+            ref={stateRef}
+            id="state"
+            name="state"
+            type="text"
+            placeholder="State"
+            className="w-full rounded border border-gray-300 px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          />
+        </div>
+        <div>
+          <FieldLabel htmlFor="postcode">Post code</FieldLabel>
+          <input
+            ref={postcodeRef}
+            id="postcode"
+            name="postcode"
+            type="text"
+            placeholder="Post code"
+            className="w-full rounded border border-gray-300 px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function GenderSelect() {
+  const { hasError, clearError } = useFieldError("gender");
+  return (
+    <select
+      id="gender"
+      name="gender"
+      onChange={clearError}
+      className={`w-full rounded border px-3 py-2 text-sm ${
+        hasError
+          ? "border-red-500 bg-red-50"
+          : "border-gray-300"
+      }`}
+    >
+      <option value="">Select</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Intersex">Intersex</option>
+      <option value="Unknown">Unknown</option>
+    </select>
+  );
+}
+
+function ResidentialStatusFieldset({
+  setResidentialStatus,
+}: {
+  residentialStatus?: string;
+  setResidentialStatus: (v: string) => void;
+}) {
+  const { hasError, clearError } = useFieldError("residentialStatus");
+  return (
+    <fieldset id="residential-status-fieldset" className="mt-6 space-y-3">
+      <legend className="text-sm font-medium text-gray-900">
+        Residential Status:<span className="text-red-500 ml-0.5">*</span>
+      </legend>
+      {hasError && (
+        <p className="text-xs text-red-500">Please select a residential status.</p>
+      )}
+      <div className={`grid gap-2 sm:grid-cols-2 rounded p-2 ${hasError ? "border border-red-400 bg-red-50" : ""}`}>
+        {[
+          "Australian Citizen",
+          "Australian Permanent Resident",
+          "Working Visa",
+          "Temporary Resident Visa",
+          "Student Visa",
+        ].map((label) => (
+          <label key={label} className="inline-flex items-center gap-2 text-sm">
+            <input
+              type="radio"
+              name="residentialStatus"
+              value={label}
+              className="text-blue-600"
+              onChange={(e) => {
+                clearError();
+                setResidentialStatus(e.target.value);
+              }}
+            />
+            {label}
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  );
+}
+
 // ── Main Form ──────────────────────────────────────────────────────────────────
 
 export default function CandidateRegistrationSampleForm() {
@@ -1580,6 +1844,16 @@ export default function CandidateRegistrationSampleForm() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [steps, setSteps] = useState<Step[]>([]);
   const [residentialStatus, setResidentialStatus] = useState("");
+  const [errorFields, setErrorFields] = useState<Set<string>>(new Set());
+
+  function clearError(name: string) {
+    setErrorFields((prev) => {
+      if (!prev.has(name)) return prev;
+      const next = new Set(prev);
+      next.delete(name);
+      return next;
+    });
+  }
   const [noOwnSuper, setNoOwnSuper] = useState(false);
   const [activeSection, setActiveSection] = useState("sec-personal");
   /** Increment when the user dismisses the success modal to remount the form and clear controlled child state (BSB, files, signature, WHS, etc.). */
@@ -1779,11 +2053,63 @@ export default function CandidateRegistrationSampleForm() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitting(true);
+    setSubmitting(false);
     setSubmitError(null);
 
     const form = e.currentTarget;
     const fd = new FormData(form);
+
+    // ── Mandatory field validation ──────────────────────────────────────────
+    const getText = (n: string) => (fd.get(n) as string | null)?.trim() ?? "";
+    const getFile = (n: string) => {
+      const el = form.querySelector<HTMLInputElement>(`input[name="${n}"]`);
+      return el?.files && el.files.length > 0;
+    };
+
+    // name → id of the visible/focusable element to scroll to
+    const REQUIRED_FIELDS: { name: string; anchorId: string }[] = [
+      { name: "firstName",            anchorId: "firstName" },
+      { name: "lastName",             anchorId: "lastName" },
+      { name: "fullAddress",          anchorId: "fullAddress" },
+      { name: "gender",               anchorId: "gender" },
+      { name: "dob",                  anchorId: "dob" },
+      { name: "mobile",               anchorId: "mobile" },
+      { name: "email",                anchorId: "email" },
+      { name: "residentialStatus",    anchorId: "residential-status-fieldset" },
+      { name: "emergencyFullName",    anchorId: "emergencyFullName" },
+      { name: "emergencyRelationship",anchorId: "emergencyRelationship" },
+      { name: "emergencyMobile",      anchorId: "emergencyMobile" },
+      { name: "tfn",                  anchorId: "tfn" },
+      { name: "passport",             anchorId: "passport-upload-zone" },
+      { name: "evoCheck",             anchorId: "evoCheck-upload-zone" },
+    ];
+
+    const missingNames: string[] = [];
+    for (const { name } of REQUIRED_FIELDS) {
+      const isFile = name === "passport" || name === "evoCheck";
+      if (isFile ? !getFile(name) : !getText(name)) missingNames.push(name);
+    }
+
+    if (missingNames.length > 0) {
+      setErrorFields(new Set(missingNames));
+      const firstMissing = REQUIRED_FIELDS.find((f) => f.name === missingNames[0]);
+      if (firstMissing) {
+        const anchor = document.getElementById(firstMissing.anchorId);
+        if (anchor) {
+          const NAVBAR_HEIGHT = 100; // fixed navbar ~70px top bar + main bar
+          const rect = anchor.getBoundingClientRect();
+          const absoluteTop = rect.top + window.scrollY - NAVBAR_HEIGHT - 24;
+          window.scrollTo({ top: absoluteTop, behavior: "smooth" });
+          setTimeout(() => {
+            try { anchor.focus(); } catch { /* non-focusable element */ }
+          }, 400);
+        }
+      }
+      return;
+    }
+
+    setErrorFields(new Set());
+    setSubmitting(true);
 
     // Count files for dynamic steps
     const fileInputs = Array.from(
@@ -1951,6 +2277,7 @@ export default function CandidateRegistrationSampleForm() {
   }
 
   return (
+    <ErrorCtx.Provider value={{ errors: errorFields, clear: clearError }}>
     <>
       {/* Step Loader / Success / Error Modal */}
       {showModal && (
@@ -2047,7 +2374,7 @@ export default function CandidateRegistrationSampleForm() {
                 </select>
               </div>
               <div>
-                <FieldLabel htmlFor="firstName">First Name</FieldLabel>
+                <FieldLabel htmlFor="firstName" required>First Name</FieldLabel>
                 <TextInput
                   id="firstName"
                   name="firstName"
@@ -2063,7 +2390,7 @@ export default function CandidateRegistrationSampleForm() {
                 />
               </div>
               <div>
-                <FieldLabel htmlFor="lastName">Last Name</FieldLabel>
+                <FieldLabel htmlFor="lastName" required>Last Name</FieldLabel>
                 <TextInput
                   id="lastName"
                   name="lastName"
@@ -2074,82 +2401,20 @@ export default function CandidateRegistrationSampleForm() {
 
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
               <div>
-                <FieldLabel htmlFor="gender">Gender</FieldLabel>
-                <select
-                  id="gender"
-                  name="gender"
-                  className="w-full rounded border border-gray-300 px-3 py-2 text-sm"
-                >
-                  <option value="">Select</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Intersex">Intersex</option>
-                  <option value="Unknown">Unknown</option>
-                </select>
+                <FieldLabel htmlFor="gender" required>Gender</FieldLabel>
+                <GenderSelect />
               </div>
               <div>
-                <FieldLabel htmlFor="dob">Date of birth</FieldLabel>
+                <FieldLabel htmlFor="dob" required>Date of birth</FieldLabel>
                 <TextInput id="dob" name="dob" type="date" />
               </div>
             </div>
 
-            <div className="mt-4 space-y-4">
-              <div>
-                <FieldLabel htmlFor="fullAddress">Full Address</FieldLabel>
-                <TextArea
-                  id="fullAddress"
-                  name="fullAddress"
-                  placeholder="Full Address"
-                  rows={5}
-                />
-              </div>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                <div>
-                  <FieldLabel htmlFor="unitNumber">Unit Number</FieldLabel>
-                  <TextInput
-                    id="unitNumber"
-                    name="unitNumber"
-                    placeholder="Unit Number"
-                  />
-                </div>
-                <div>
-                  <FieldLabel htmlFor="streetNumber">Street Number</FieldLabel>
-                  <TextInput
-                    id="streetNumber"
-                    name="streetNumber"
-                    placeholder="Street No"
-                  />
-                </div>
-                <div>
-                  <FieldLabel htmlFor="streetName">Street Name</FieldLabel>
-                  <TextInput
-                    id="streetName"
-                    name="streetName"
-                    placeholder="Street Name"
-                  />
-                </div>
-                <div>
-                  <FieldLabel htmlFor="suburb">Suburb</FieldLabel>
-                  <TextInput id="suburb" name="suburb" placeholder="Suburb" />
-                </div>
-                <div>
-                  <FieldLabel htmlFor="state">State</FieldLabel>
-                  <TextInput id="state" name="state" placeholder="State" />
-                </div>
-                <div>
-                  <FieldLabel htmlFor="postcode">Post code</FieldLabel>
-                  <TextInput
-                    id="postcode"
-                    name="postcode"
-                    placeholder="Post code"
-                  />
-                </div>
-              </div>
-            </div>
+            <AddressAutocomplete />
 
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
               <div>
-                <FieldLabel htmlFor="mobile">Mobile</FieldLabel>
+                <FieldLabel htmlFor="mobile" required>Mobile</FieldLabel>
                 <TextInput
                   id="mobile"
                   name="mobile"
@@ -2158,7 +2423,7 @@ export default function CandidateRegistrationSampleForm() {
                 />
               </div>
               <div>
-                <FieldLabel htmlFor="email">Email</FieldLabel>
+                <FieldLabel htmlFor="email" required>Email</FieldLabel>
                 <TextInput
                   id="email"
                   name="email"
@@ -2168,44 +2433,12 @@ export default function CandidateRegistrationSampleForm() {
               </div>
             </div>
 
-            <div className="mt-4">
-              <SmartFileField
-                id="photo"
-                name="photo"
-                label="Attach your photo"
-              />
-            </div>
-
             <JobactiveField />
 
-            <fieldset className="mt-6 space-y-3">
-              <legend className="text-sm font-medium text-gray-900">
-                Residential Status:
-              </legend>
-              <div className="grid gap-2 sm:grid-cols-2">
-                {[
-                  "Australian Citizen",
-                  "Australian Permanent Resident",
-                  "Working Visa",
-                  "Temporary Resident Visa",
-                  "Student Visa",
-                ].map((label) => (
-                  <label
-                    key={label}
-                    className="inline-flex items-center gap-2 text-sm"
-                  >
-                    <input
-                      type="radio"
-                      name="residentialStatus"
-                      value={label}
-                      className="text-blue-600"
-                      onChange={(e) => setResidentialStatus(e.target.value)}
-                    />
-                    {label}
-                  </label>
-                ))}
-              </div>
-            </fieldset>
+            <ResidentialStatusFieldset
+              residentialStatus={residentialStatus}
+              setResidentialStatus={setResidentialStatus}
+            />
 
             {/* Conditional Visa fields */}
             <AnimatePresence>
@@ -2255,6 +2488,7 @@ export default function CandidateRegistrationSampleForm() {
                 id="passport"
                 name="passport"
                 label="Attach Passport image"
+                required
               />
               <SmartFileField
                 id="birthCert"
@@ -2295,6 +2529,7 @@ export default function CandidateRegistrationSampleForm() {
                 id="evoCheck"
                 name="evoCheck"
                 label="Attach Vevo Check"
+                required
               />
             </div>
           </SectionCard>
@@ -2302,7 +2537,7 @@ export default function CandidateRegistrationSampleForm() {
           <SectionCard id="sec-emergency" title="Emergency Contact Information">
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
-                <FieldLabel htmlFor="emergencyFullName">Full Name</FieldLabel>
+                <FieldLabel htmlFor="emergencyFullName" required>Full Name</FieldLabel>
                 <TextInput
                   id="emergencyFullName"
                   name="emergencyFullName"
@@ -2310,7 +2545,7 @@ export default function CandidateRegistrationSampleForm() {
                 />
               </div>
               <div>
-                <FieldLabel htmlFor="emergencyRelationship">
+                <FieldLabel htmlFor="emergencyRelationship" required>
                   Relationship
                 </FieldLabel>
                 <TextInput
@@ -2320,7 +2555,7 @@ export default function CandidateRegistrationSampleForm() {
                 />
               </div>
               <div>
-                <FieldLabel htmlFor="emergencyMobile">
+                <FieldLabel htmlFor="emergencyMobile" required>
                   Mobile Phone Number
                 </FieldLabel>
                 <TextInput
@@ -2500,7 +2735,7 @@ export default function CandidateRegistrationSampleForm() {
             title="Tax File number Declaration Information"
           >
             <div className="max-w-xl">
-              <FieldLabel htmlFor="tfn">Tax File Number</FieldLabel>
+              <FieldLabel htmlFor="tfn" required>Tax File Number</FieldLabel>
               <TextInput id="tfn" name="tfn" placeholder="TFN" />
             </div>
 
@@ -2903,5 +3138,6 @@ export default function CandidateRegistrationSampleForm() {
         </form>
       </div>
     </>
+    </ErrorCtx.Provider>
   );
 }
